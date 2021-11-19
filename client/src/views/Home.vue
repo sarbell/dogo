@@ -32,12 +32,13 @@
             <v-row align="center" justify="center" >
               <v-col cols="10">
                 <h2 class="pb-3 pt-6 text-h3">Cast your vote!</h2>
+                <v-btn color="" :to="{name: 'polling'}" class="text-uppercase mt-5">Go to Polls</v-btn>
               </v-col>
             </v-row>
             <v-row>
               <v-col>
                 <!-- random pic -->
-                <random-pic/>
+                <!-- <random-pic/> -->
                 <!-- <vote-home /> -->
               </v-col>
             </v-row>

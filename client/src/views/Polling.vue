@@ -123,6 +123,8 @@ import API from '../api'
                 "love": currentData.love + 1
             }
             const response = await API.vote(id, vote)
+                        this.updatePage()
+
         },
         async voteLike(id){
             let currentData = await API.getPollByID(id)
@@ -130,6 +132,8 @@ import API from '../api'
                 "like": currentData.like + 1
             }
             const response = await API.vote(id, vote)
+                        this.updatePage()
+
 
         },
         async voteDislike(id){
@@ -138,12 +142,14 @@ import API from '../api'
                 "dontLike": currentData.dontLike + 1
             }
             const response = await API.vote(id, vote)
-            currentPollRatings(id)
+            // currentPollRatings(id)
+            this.updatePage()
+
         },
-        // async currentPollRatings(id){
-        //     const response = await API.getPollByID(id)
-        //     return response
-        // }
+        async updatePage(){
+            const response = await API.getPolls()
+                this.polls = response
+        }
      },updated:{
         async currentPollRatings(id){
             const response = await API.getPollByID(id)

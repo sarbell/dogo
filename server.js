@@ -5,10 +5,16 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const passport = require('passport')
 const cookieParser = require('cookie-parser')
+const history = require('connect-history-api-fallback');
+
+
+const path = require("path")
+
 
 const app = express()
 const port = process.env.PORT || 5000
 
+app.use(history());
 app.use(cookieParser())
 // passport authentication
 const strategy = require('./passport')
@@ -30,6 +36,7 @@ mongoose.connect(process.env.DB_URI || 'mongodb://localhost:27017/dog_project', 
 
 // routers prefix
 app.use('/api', require('./routes/routes'))
+
 app.use(express.static(path.join(__dirname, "./dist")))
 app.get('/*', (req, res) => {
     res.sendFile(path.join(__dirname, './dist', 'index.html'))

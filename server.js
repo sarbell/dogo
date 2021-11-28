@@ -30,6 +30,10 @@ mongoose.connect(process.env.DB_URI || 'mongodb://localhost:27017/dog_project', 
 
 // routers prefix
 app.use('/api', require('./routes/routes'))
+app.use(express.static(path.join(__dirname, "./dist")))
+app.get('/*', (req, res) => {
+    res.sendFile(path.join(__dirname, './dist', 'index.html'))
+})
 
 
 // Start server

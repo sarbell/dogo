@@ -52,7 +52,6 @@ module.exports = class API {
        user.username = req.body.username
        user.password = await user.setPassword(req.body.password)
        user.created = Date.now()
-   
        try{
            await User.create(user)
            res.status(201).json({message: 'User created successfully!'})

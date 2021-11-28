@@ -9,11 +9,12 @@
         <v-btn class="text-uppercase" :to="{name: 'home'}" text>Home</v-btn>
         <v-btn class="text-uppercase" :to="{name: 'signin'}" text>SIGN IN</v-btn>
       </v-toolbar-items>
-      <v-toolbar-items class="hidden-xs-only" v-if="loggedIn">
+      <v-toolbar-items  v-if="loggedIn">
         <v-btn class="text-uppercase" :to="{name: 'home'}" text>Home</v-btn>
         <v-btn class="text-uppercase" :to="{name: 'random'}" text>Random Dogs</v-btn>
         <v-btn class="text-uppercase" :to="{name: 'favorites'}" text>Favorites</v-btn>
         <v-btn class="text-uppercase" :to="{name: 'polling'}" text> Polls </v-btn>
+        <v-btn class="text-uppercase" :to="{name: 'account'}" text> Account </v-btn>
         <v-btn class="text-uppercase" text @click="signout()">Sign out</v-btn>
       </v-toolbar-items>
     </v-app-bar>

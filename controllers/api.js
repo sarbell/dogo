@@ -45,6 +45,18 @@ module.exports = class API {
        }
    }
 
+   static async getCurrentUser(req, res){
+    let user = null
+    try {
+        if(req.cookies.token){
+            user = jwt.decode(req.cookies.token, APP_SECRET) 
+        }
+        res.status(200).json(user)
+    }catch (err){
+        res.status(404).json({message: err.message})
+    }
+} 
+
    // Create a user
    static async createUser(req, res){
        let user = new User

@@ -40,6 +40,12 @@ export default class API {
         return res.data
     }
 
+        // to get current user
+    static async getCurrentUser(){
+        const res = await axios.get(`${url}/user/current`)
+        return res.data
+    }
+
     // Add to favorites
     static async addDogToFavorites(dog){
         const res = await axios.post(`${url}/favorites/add`, dog)

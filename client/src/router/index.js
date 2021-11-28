@@ -7,6 +7,7 @@ import Favorites from '../views/Favorites'
 import Vote from '../components/Vote'
 import Polling from '../views/Polling'
 import RandomPage from '../views/RandomPage'
+import Account from '../views/Account'
 
 
 Vue.use(VueRouter)
@@ -48,18 +49,15 @@ const routes = [
     component: RandomPage
   },
   {
+    path: '/account',
+    name: 'account',
+    component: Account
+  },
+  {
     path: '/:catchAll(.*)*',
     name: "home",
     component: Home,
   },
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
 ]
 
 const router = new VueRouter({

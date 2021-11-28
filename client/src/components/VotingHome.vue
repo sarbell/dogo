@@ -1,43 +1,31 @@
 <template>
   <v-container>
-      <v-row>
-          <v-col align="end">
-            <v-btn icon v-if="loggedIn" :to="{name: 'vote'}">
-                <v-icon  color="success"> mdi-plus</v-icon>
-                Add Poll
-            </v-btn>
-          </v-col>
-      </v-row>
     <v-row>
-        <v-col align="center">
-            <h1 class="text-h1">Polls</h1>
-       </v-col>
-    </v-row>
-    <v-row>
-        <v-col v-for="poll in polls" :key="poll._id" sm="6" md="4">
-            <v-card 
+        <v-col>
+             <v-card 
+                v-if="random"
                 class="mx-auto"
                 max-width="400"
             >
                 <v-img
                 class="white--text align-end"
                 height="300px"
-                :src="`${poll.image}`"
+                :src="`${random.image}`"
                 >
                 </v-img>
                 <v-card-subtitle class="pb-0">
-                <!-- Created by: <span>{{getUserName(poll.user)}}</span>  -->
+                <!-- Created by: <span>{{getUserName(random.user)}}</span>  -->
                 </v-card-subtitle>
                 <v-spacer></v-spacer>
                 <v-card-text class="text--primary">
                     <h3 class="font-weight-light text-uppercase">Cast your vote</h3>
                 </v-card-text>
-                <v-card-actions > 
+                <v-card-actions v-if="!showAnswers"> 
                     <v-row>
                         <v-col className="text-left">
                             <v-tooltip right>
                                 <template v-slot:activator="{on, attrs}">
-                                    <v-btn icon @click="voteLove(poll._id)">
+                                    <v-btn icon @click="voteLove(random._id)">
                                         <v-icon large color="pink" v-bind="attrs" v-on="on">
                                         mdi-heart
                                         </v-icon>
@@ -49,7 +37,7 @@
                         <v-col className="text-center">
                             <v-tooltip right>
                                 <template v-slot:activator="{on, attrs}">
-                                    <v-btn icon @click="voteLike(poll._id)">
+                                    <v-btn icon @click="voteLike(random._id)">
                                         <v-icon large color="blue" v-bind="attrs" v-on="on">mdi-thumb-up</v-icon> 
                                     </v-btn>
                                 </template>
@@ -59,7 +47,7 @@
                         <v-col className="text-right">
                             <v-tooltip left>
                                 <template v-slot:activator="{on, attrs}">
-                                    <v-btn icon @click="voteDislike(poll._id)">
+                                    <v-btn icon @click="voteDislike(random._id)">
                                     <v-icon large color="blue-grey darken-3" v-bind="attrs" v-on="on">mdi-thumb-down</v-icon> 
                                     </v-btn>
                                 </template>
@@ -69,7 +57,7 @@
                     </v-row>
     
                 </v-card-actions>
-                <v-card-actions v-if="showAnswers.show == true && showAnswers.id == poll._id">
+                <v-card-actions v-if="showAnswers">
                     <v-row >
                         <v-col>
                             <v-progress-linear
@@ -114,18 +102,16 @@
 import API from '../api'
   export default {
     data: () => ({ 
-        polls: [],
-        loggedIn: false,
-        showAnswers: {
-            show: false,
-            id: ''
-        },
-        answerTotals: 0,
-        loveTotal: 0,
-        likeTotal: 0,
-        dislikeTotal: 0,
-      }),
-     async created(){
+      polls: [],
+      loggedIn: false,
+      random: '',
+      showAnswers: false,
+      answerTotals: '',
+      loveTotal: '',
+      likeTotal: '',
+      dislikeTotal: '',
+    }),
+    async created(){
         if(this.$cookies.get("token")){
             this.loggedIn = true
         }else{
@@ -133,6 +119,7 @@ import API from '../api'
         }
         const response = await API.getPolls()
         this.polls = response
+        this.random = this.polls[Math.floor(Math.random()*this.polls.length)];
      },
      methods: {
         async voteLove(id){
@@ -142,7 +129,6 @@ import API from '../api'
             }
             const response = await API.vote(id, vote)
             response ? this.findTotals(id) : ''
-
         },
         async voteLike(id){
             let currentData = await API.getPollByID(id)
@@ -151,7 +137,6 @@ import API from '../api'
             }
             const response = await API.vote(id, vote)
             response ? this.findTotals(id) : ''
-
         },
         async voteDislike(id){
             let currentData = await API.getPollByID(id)
@@ -160,6 +145,7 @@ import API from '../api'
             }
             const response = await API.vote(id, vote)
             response ? this.findTotals(id) : ''
+
         },
         async findTotals(id){
             let result = await API.getPollByID(id)
@@ -167,11 +153,8 @@ import API from '../api'
             this.loveTotal = (result.love / this.answerTotals) * 100
             this.likeTotal = (result.like / this.answerTotals) * 100
             this.dislikeTotal = (result.dontLike / this.answerTotals) * 100
-            this.showAnswers = {
-                show: true,
-                id: id
-            }
-            this.poll = result
+            this.showAnswers = true
+            this.random = result
         }
      }
   }

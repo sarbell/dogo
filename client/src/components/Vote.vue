@@ -40,7 +40,6 @@
                 }
                 if(this.$refs.form.validate()){
                     const response = await API.addPoll(poll)
-                    console.log(response)
                     this.$router.push({ name: 'polling', params: { message: response.message } })
                 }
             }

@@ -1,6 +1,5 @@
 // imports
 require('dotenv').config()
-// const cron = require('node-cron')
 const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
@@ -32,29 +31,6 @@ mongoose.connect(process.env.DB_URI || 'mongodb://localhost:27017/dog_project', 
 // routers prefix
 app.use('/api', require('./routes/routes'))
 
-// var request = require('request');
-// let image = ''
-// cron.schedule("00 00 2 * * 0-6", function() {
-//     console.log("should be every day at 2am?");
-//     request('https://dog.ceo/api/breeds/image/random', function (error, response, body) {
-//         if (!error && response.statusCode == 200) {
-//             console.log(body)
-//             image = body
-//         }
-//      })
-// })
-
-// cron.schedule("* * * * *", function() {
-//     // API call goes here
-// console.log("running a task every minute");
-// request('https://dog.ceo/api/breeds/image/random', function (error, response, body) {
-//     if (!error && response.statusCode == 200) {
-//         console.log(body)
-//         image = body
-//     }
-//  })
-// })
-// console.log(image)
 
 // Start server
 app.listen(port, () => console.log(`Server running at port ${port}`))

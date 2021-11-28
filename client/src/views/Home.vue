@@ -32,14 +32,12 @@
             <v-row align="center" justify="center" >
               <v-col cols="10">
                 <h2 class="pb-3 pt-6 text-h3">Cast your vote!</h2>
-                <v-btn color="" :to="{name: 'polling'}" class="text-uppercase mt-5">Go to Polls</v-btn>
+                <v-btn color="" :to="{name: 'polling'}" class="text-uppercase mt-5">See More Polls</v-btn>
               </v-col>
             </v-row>
             <v-row>
               <v-col>
-                <!-- random pic -->
-                <!-- <random-pic/> -->
-                <!-- <vote-home /> -->
+                <vote-home />
               </v-col>
             </v-row>
           </section>
@@ -50,7 +48,7 @@
 
 <script>
 import Random from '../components/Random.vue'
-import Vote from '../components/Vote.vue'
+import VotingHome from '../components/VotingHome.vue'
   export default {
     data: () => ({ 
       loggedIn: false,
@@ -58,7 +56,7 @@ import Vote from '../components/Vote.vue'
       }),
       components:{
          'random-pic': Random,
-         'vote-home': Vote
+         'vote-home': VotingHome
      },
      async created(){
          if(this.$cookies.get("token")){

@@ -72,6 +72,13 @@
           const response = await API.addDogToFavorites(favorite)
           if(response.status == 200){
             this.heartIcon = 'mdi-heart'
+            this.$toasted.show('Added to favorites', {
+                type: 'success'
+            })
+          }else{
+               this.$toasted.show('Something went wrong', {
+                type: 'error'
+            })
           }
 
         },

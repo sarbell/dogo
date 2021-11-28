@@ -49,7 +49,6 @@
                 }
                 if(this.$refs.form.validate()){
                     const response = await API.addUser(user)
-                    console.log(response)
                     this.$router.push({ name: 'signin', params: { message: response.message } })
                 }
             }

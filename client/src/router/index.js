@@ -6,6 +6,7 @@ import SignIn from '../views/SignIn'
 import Favorites from '../views/Favorites'
 import Vote from '../components/Vote'
 import Polling from '../views/Polling'
+import RandomPage from '../views/RandomPage'
 
 
 Vue.use(VueRouter)
@@ -40,6 +41,16 @@ const routes = [
     path: '/add-poll',
     name: 'vote',
     component: Vote
+  },
+  {
+    path: '/random',
+    name: 'random',
+    component: RandomPage
+  },
+  {
+    path: '/:catchAll(.*)*',
+    name: "home",
+    component: Home,
   },
   {
     path: '/about',

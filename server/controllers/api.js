@@ -166,7 +166,6 @@ static async addPoll(req, res){
 static async vote(req, res){
     const id = req.params.id
     const vote = req.body
-    // console.log(vote)
     try{
         await Poll.findByIdAndUpdate(id, vote)
         res.status(200).json({message: 'Vote updated successfully'})

@@ -35,19 +35,19 @@ function getCurrentUser(req){
 // users
 router.post("/user/", API.createUser)
 router.post("/login/", API.loginUser)
-router.get("/user/:id",  API.fetchUserByID)
+// router.get("/user/:id", API.fetchUserByID)
 router.put("/user/:id",requireLogIn, API.updateUser)
 router.delete("/user/:id",requireLogIn, API.deleteUser)
 
 // favorites
-router.get("/favorites", API.getFavorites)
-router.post("/favorites/add", API.addToFavorites)
-router.delete("/favorites/remove/:id", API.removeFromFavorites)
+router.get("/favorites", requireLogIn, API.getFavorites)
+router.post("/favorites/add", requireLogIn, API.addToFavorites)
+router.delete("/favorites/remove/:id", requireLogIn, API.removeFromFavorites)
 
 //POLLS
 router.get('/poll/all', API.getPolls)
 router.put('/poll/vote/:id', API.vote)
-router.post('/poll/add', API.addPoll)
+router.post('/poll/add', requireLogIn, API.addPoll)
 router.get('/poll/:id', API.getPollByID)
 
 

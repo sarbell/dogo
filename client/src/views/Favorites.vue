@@ -6,6 +6,7 @@
     <v-row>
         <v-col align="center">
             <h1 class="text-h1">Favorites</h1>
+            <v-btn color="amber" :to="{name: 'random'}">Add More to Favorites</v-btn>
         </v-col>
     </v-row>
   <v-row>
@@ -63,9 +64,12 @@ import API from '../api'
       }),
      async created(){
           if(!this.$cookies.get("token")){
-            this.$router.push({name: 'login'})
+            this.$router.push({name: 'signin'})
         }else{
             const response = await API.getFavs()
+            response.sort(function(a,b){
+              return new Date(b.date_saved) - new Date(a.date_saved);
+            });
             this.favs = response
         }
 

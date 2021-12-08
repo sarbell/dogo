@@ -1,3 +1,3 @@
 # dogo
 To run server: npm run dev
-To run client: npm start
+To run client: cd client npm start

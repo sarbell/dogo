@@ -93,9 +93,14 @@ import API from '../api'
             this.loggedIn = false
             this.$router.push({name: 'signin'})
         }
-        const response = await API.getCurrentUser()
+        let response = await API.getCurrentUser()
         if(response){
             this.accountInfo = response
+            response = await API.getUserByID(this.accountInfo._id)
+                if(response){
+                    this.accountInfo = response
+
+                }
         }
 
      },methods:{

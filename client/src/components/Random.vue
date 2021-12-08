@@ -3,7 +3,7 @@
     class="mx-auto"
     max-width="80%"
   >
-    <v-img contain :src="`${dogUrl}`"></v-img>
+    <v-img contain height="500" :src="`${dogUrl}`"></v-img>
     <v-card-actions>
       <div v-if="loggedIn">
       <v-tooltip bottom>

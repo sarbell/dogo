@@ -34,6 +34,7 @@
         :lazy-src="`${dog.urlOfImage}`"
         aspect-ratio="1"
         class="grey lighten-2"
+        contain
       >
         <template v-slot:placeholder>
           <v-row

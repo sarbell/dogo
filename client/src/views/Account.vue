@@ -96,7 +96,6 @@ import API from '../api'
         const response = await API.getCurrentUser()
         if(response){
             this.accountInfo = response
-                console.log(this.accountInfo)
         }
 
      },methods:{
@@ -115,10 +114,14 @@ import API from '../api'
                 'email': this.accountInfo.email,
             }
             if(this.$refs.form.validate()){
-                const response = await API.updateUser(this.accountInfo._id, user)
-                console.log(response)
-                this.$router.push({ name: 'home', params: { message: response.message } })
-                this.$router.go()
+                let response = await API.updateUser(this.accountInfo._id, user)
+
+             response = await API.getUserByID(this.accountInfo._id)
+                if(response){
+                    this.accountInfo = response
+                    this.$router.push({ name: 'home', params: { message: response.message } })
+                    this.$router.go()
+                }
             }
         }
      }

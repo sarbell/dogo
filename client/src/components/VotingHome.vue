@@ -14,7 +14,6 @@
                 >
                 </v-img>
                 <v-card-subtitle class="pb-0">
-                <!-- Created by: <span>{{getUserName(random.user)}}</span>  -->
                 </v-card-subtitle>
                 <v-spacer></v-spacer>
                 <v-card-text class="text--primary">
@@ -26,19 +25,19 @@
                             <v-tooltip right>
                                 <template v-slot:activator="{on, attrs}">
                                     <v-btn icon @click="voteLove(random._id)">
-                                        <v-icon large color="pink" v-bind="attrs" v-on="on">
-                                        mdi-heart
+                                        <v-icon x-large color="blue" v-bind="attrs" v-on="on">
+                                        mdi-seal-variant
                                         </v-icon>
                                     </v-btn>
                                 </template>
-                                <span>Cutest dog ever!</span>
+                                <span>Best in show!</span>
                             </v-tooltip>
                         </v-col>
                         <v-col className="text-center">
                             <v-tooltip right>
                                 <template v-slot:activator="{on, attrs}">
                                     <v-btn icon @click="voteLike(random._id)">
-                                        <v-icon large color="blue" v-bind="attrs" v-on="on">mdi-thumb-up</v-icon> 
+                                        <v-icon large color="pink" v-bind="attrs" v-on="on">mdi-thumb-up</v-icon> 
                                     </v-btn>
                                 </template>
                                 <span>Pretty cute dog!</span>
@@ -61,7 +60,7 @@
                     <v-row >
                         <v-col>
                             <v-progress-linear
-                            color="pink"
+                            color="blue"
                             height="20"
                             v-model="loveTotal"
                             striped
@@ -70,7 +69,7 @@
                             </v-progress-linear>
                             <br>
                             <v-progress-linear
-                            color="blue"
+                            color="pink"
                             height="20"
                             v-model="likeTotal"
                             striped

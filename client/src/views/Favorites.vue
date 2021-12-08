@@ -14,7 +14,7 @@
       v-for="dog in favs"
       :key="dog._id"
       class="d-flex child-flex"
-      cols="4"
+      cols="sm-4"
     >
     <v-card tile>
         <v-card-title class="text-uppercase pl-1 pr-1 ">

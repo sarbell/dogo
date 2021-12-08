@@ -1,17 +1,61 @@
 <template>
   <v-app id="inspire">
+    <v-navigation-drawer
+      v-model="drawer"
+      app
+      temporary
+    >
+     <v-list dense nav >
+          <v-list-item-group v-if="!loggedIn" active-class="indigo--text text--accent-4">
+            <v-list-item-content >
+              <v-list-item link>
+                <v-list-item-title class="text-uppercase" @click="$router.push('/')"  >Home</v-list-item-title>
+              </v-list-item>
+              <v-list-item>
+                 <v-list-item-title class="text-uppercase" @click="$router.push('/signin')" >Sign In</v-list-item-title>
+              </v-list-item>
+            </v-list-item-content>
+          </v-list-item-group>
+          
+          <v-list-item-group v-if="loggedIn" active-class="indigo--text text--accent-4">
+            <v-list-item-content >
+              <v-list-item link>
+                <v-list-item-title class="text-uppercase" @click="$router.push('/')"  >Home</v-list-item-title>
+              </v-list-item>
+              <v-list-item>
+                 <v-list-item-title class="text-uppercase" @click="$router.push('/random')" >Random Dogs</v-list-item-title>
+              </v-list-item>
+              <v-list-item>
+                <v-list-item-title class="text-uppercase" @click="$router.push('/favorites')" >Favorites</v-list-item-title>
+              </v-list-item>
+              <v-list-item>
+                <v-list-item-title class="text-uppercase" @click="$router.push('/vote')" >Polls</v-list-item-title>
+              </v-list-item>
+              <v-list-item>
+                <v-list-item-title class="text-uppercase" @click="$router.push('/account')" >Account</v-list-item-title>
+              </v-list-item>
+              <v-list-item>
+                <v-list-item-title class="text-uppercase" @click="signout()" >Sign Out</v-list-item-title>
+              </v-list-item>
+            </v-list-item-content>
+          </v-list-item-group>
+
+      </v-list>
+    </v-navigation-drawer>
+
     <v-app-bar app>
       <span class="hidden-sm-and-up">
+        <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
       </span>
-      <v-toolbar-title :to="{name: 'home'}"> DOGO</v-toolbar-title>
+      <v-toolbar-title  style="cursor: pointer" @click="$router.push('/')" > DOGO</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-xs-only" v-if="!loggedIn">
         <v-btn class="text-uppercase" :to="{name: 'home'}" text>Home</v-btn>
         <v-btn class="text-uppercase" :to="{name: 'signin'}" text>SIGN IN</v-btn>
       </v-toolbar-items>
-      <v-toolbar-items  v-if="loggedIn">
-        <v-btn class="text-uppercase" :to="{name: 'home'}" text>Home</v-btn>
-        <v-btn class="text-uppercase" :to="{name: 'random'}" text>Random Dogs</v-btn>
+      <v-toolbar-items  class=" hidden-xs-only" v-if="loggedIn">
+        <v-btn class="text-uppercase" :to="{name: 'home'}" exact text>Home</v-btn>
+        <v-btn class="text-uppercase" :to="{name: 'random'}" exact text>Random Dogs</v-btn>
         <v-btn class="text-uppercase" :to="{name: 'favorites'}" text>Favorites</v-btn>
         <v-btn class="text-uppercase" :to="{name: 'polling'}" text> Polls </v-btn>
         <v-btn class="text-uppercase" :to="{name: 'account'}" text> Account </v-btn>
@@ -42,6 +86,8 @@
          }else{
            this.loggedIn = false
          }
+         document.title ="DOGO app"
+
      },
      methods:{
        signout(){

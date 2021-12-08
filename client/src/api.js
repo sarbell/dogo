@@ -36,7 +36,7 @@ export default class API {
 
      // to get single user by ID
      static async getUserByID(id){
-        const res = await axios.get(`${url}/user/${id}`)
+        const res = await axios.get(`${url}/user/current/${id}`)
         return res.data
     }
 

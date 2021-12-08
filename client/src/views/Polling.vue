@@ -26,31 +26,34 @@
                 >
                 </v-img>
                 <v-card-subtitle class="pb-0">
-                <!-- Created by: <span>{{getUserName(poll.user)}}</span>  -->
                 </v-card-subtitle>
                 <v-spacer></v-spacer>
-                <v-card-text class="text--primary">
+                <v-card-text class="text--primary" v-if="!hasVoted.includes(poll._id)">
                     <h3 class="font-weight-light text-uppercase">Cast your vote</h3>
                 </v-card-text>
-                <v-card-actions > 
+                <v-card-text class="text--primary" v-if="hasVoted.includes(poll._id)">
+                    <h3 class="font-weight-light text-uppercase">Poll Closed</h3>
+                </v-card-text>
+
+                <v-card-actions v-if="!hasVoted.includes(poll._id) "> 
                     <v-row>
                         <v-col className="text-left">
                             <v-tooltip right>
                                 <template v-slot:activator="{on, attrs}">
                                     <v-btn icon @click="voteLove(poll._id)">
-                                        <v-icon large color="pink" v-bind="attrs" v-on="on">
-                                        mdi-heart
+                                        <v-icon x-large color="blue" v-bind="attrs" v-on="on">
+                                        mdi-seal-variant
                                         </v-icon>
                                     </v-btn>
                                 </template>
-                                <span>Cutest dog ever!</span>
+                                <span>Best in show!</span>
                             </v-tooltip>
                         </v-col>
                         <v-col className="text-center">
                             <v-tooltip right>
                                 <template v-slot:activator="{on, attrs}">
                                     <v-btn icon @click="voteLike(poll._id)">
-                                        <v-icon large color="blue" v-bind="attrs" v-on="on">mdi-thumb-up</v-icon> 
+                                        <v-icon large color="pink" v-bind="attrs" v-on="on">mdi-thumb-up</v-icon> 
                                     </v-btn>
                                 </template>
                                 <span>Pretty cute dog!</span>
@@ -73,7 +76,7 @@
                     <v-row >
                         <v-col>
                             <v-progress-linear
-                            color="pink"
+                            color="blue"
                             height="20"
                             v-model="loveTotal"
                             striped
@@ -82,7 +85,7 @@
                             </v-progress-linear>
                             <br>
                             <v-progress-linear
-                            color="blue"
+                            color="pink"
                             height="20"
                             v-model="likeTotal"
                             striped
@@ -124,6 +127,7 @@ import API from '../api'
         loveTotal: 0,
         likeTotal: 0,
         dislikeTotal: 0,
+        hasVoted: []
       }),
      async created(){
         if(this.$cookies.get("token")){
@@ -171,6 +175,7 @@ import API from '../api'
                 show: true,
                 id: id
             }
+            this.hasVoted.push(id)
             this.poll = result
         }
      }

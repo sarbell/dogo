@@ -1,11 +1,9 @@
 <template>
   <v-card
     class="mx-auto"
-    max-width="70%"
+    max-width="80%"
   >
-    <v-img  height="500px" :src="`${dogUrl}`"></v-img>
-
-
+    <v-img contain :src="`${dogUrl}`"></v-img>
     <v-card-actions>
       <div v-if="loggedIn">
       <v-tooltip bottom>
@@ -21,22 +19,7 @@
         Fetch Random Dog!
       </v-btn>
       <v-spacer></v-spacer>
-
-      <!-- <v-btn
-        icon
-        @click="show = !show"
-      >
-        <v-icon>{{ show ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
-      </v-btn> -->
     </v-card-actions>
-    <!-- <v-expand-transition>
-      <div v-show="show">
-        <v-divider></v-divider>
-        <v-card-text class="text-uppercase">
-            {{getDogBreed(dogUrl)}}
-        </v-card-text>
-      </div>
-    </v-expand-transition> -->
   </v-card>
 </template>
 
@@ -72,11 +55,11 @@
           const response = await API.addDogToFavorites(favorite)
           if(response.status == 200){
             this.heartIcon = 'mdi-heart'
-            this.$toasted.show('Added to favorites', {
+            this.$toasted.show('Added to favorites!', {
                 type: 'success'
             })
           }else{
-               this.$toasted.show('Something went wrong', {
+               this.$toasted.show('Something went wrong!', {
                 type: 'error'
             })
           }
@@ -100,3 +83,10 @@
 
   }
 </script>
+<style>
+  .toasted {
+    font-family: Roboto, sans-serif;
+    font-weight: 600 !important;
+
+  }
+</style>

@@ -35,6 +35,7 @@ function getCurrentUser(req){
 // users
 router.post("/user/", API.createUser)
 router.post("/login/", API.loginUser)
+router.get("/user/current/:id", API.fetchUserByID)
 router.get("/user/current", requireLogIn, API.getCurrentUser)
 router.put("/user/:id", requireLogIn, API.updateUser)
 router.delete("/user/:id",requireLogIn, API.deleteUser)
